@@ -74,3 +74,25 @@ history = model.fit(X_train, Y_train, epochs = 100, batch_size = 256,
                     callbacks = [checkpoint],
                     verbose = 1,
                     shuffle = False)
+
+from keras.models import load_model
+
+best_model = load_model('saved_models/model_epoch_89.hdf5')
+train_predict = best_model.predict(X_train)
+Y_hat_train = scaler.inverse_transform(train_predict)
+
+test_predict = best_model.predict(X_test)
+Y_hat_test = scaler.inverse_transform(test_predict)
+
+Y_test = scaler.inverse_trainform([Y_test])
+Y_train = scaler.inverse_transform([Y_train])
+
+Y_hat_train = np.reshape(Y_hat_train, newshape = 583)
+Y_hat_test = np.reshape(Y_hat_test, newshape = 131)
+
+Y_train = np.reshape(Y_train, newshape = 583)
+Y_test = np.reshape(Y_test, newshape = 181)
+
+from sklearn.metrics import mean_squared_error
+train_RMSE = np.sqrt(mean_squared_error(Y_train, Y_hat_train))
+test_RMSE = np.sqrt(mean_squared_error(Y_test, Y_hat_test))
