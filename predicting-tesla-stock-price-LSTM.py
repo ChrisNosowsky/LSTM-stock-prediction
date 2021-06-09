@@ -96,3 +96,8 @@ Y_test = np.reshape(Y_test, newshape = 181)
 from sklearn.metrics import mean_squared_error
 train_RMSE = np.sqrt(mean_squared_error(Y_train, Y_hat_train))
 test_RMSE = np.sqrt(mean_squared_error(Y_test, Y_hat_test))
+
+print('Train RMSE is: ')
+print(train_RMSE, '\n')
+print('Test RMSE is: ')
+print(test_RMSE)
